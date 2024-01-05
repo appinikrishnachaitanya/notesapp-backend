@@ -14,7 +14,7 @@ public class RateLimitService {
 
 	@Bean
 	public Bucket bucket() {
-		Bandwidth limit = Bandwidth.classic(1, Refill.intervally(10, Duration.ofMinutes(1)));
+		Bandwidth limit = Bandwidth.classic(10, Refill.intervally(10, Duration.ofMinutes(1)));
 		return Bucket.builder().addLimit(limit).build();
 
 	}

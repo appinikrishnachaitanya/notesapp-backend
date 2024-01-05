@@ -1,0 +1,282 @@
+{
+	"info": {
+		"_postman_id": "7ed5016f-2396-4597-8288-fe80f0d90020",
+		"name": "notes-app-collection",
+		"schema": "https://schema.getpostman.com/json/collection/v2.0.0/collection.json",
+		"_exporter_id": "32076117"
+	},
+	"item": [
+		{
+			"name": "auth",
+			"item": [
+				{
+					"name": "http://localhost:8080/api/auth/signup",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \r\n    \"emailId\":\"xyz@email.com\",\r\n    \"password\":\"abc@abc123\",\r\n    \"phoneNumber\":\"7095657950\",\r\n    \"name\" : \"krishna\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": "http://localhost:8080/api/auth/signup"
+					},
+					"response": []
+				},
+				{
+					"name": "http://localhost:8080/api/auth/login",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"username\":\"xyz@email.com\",\r\n    \"password\":\"abc@abc123\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": "http://localhost:8080/api/auth/login"
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "notes-apis",
+			"item": [
+				{
+					"name": "create-note",
+					"item": [
+						{
+							"name": "http://localhost:8080/api/note",
+							"request": {
+								"auth": {
+									"type": "basic",
+									"basic": {
+										"username": "7095657950",
+										"password": "abc@abc123"
+									}
+								},
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"title\" :\"this is java notes\",\r\n    \"content\":\"this is all about the java content\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": "http://localhost:8080/api/note"
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "get-note",
+					"item": [
+						{
+							"name": "http://localhost:8080/api/note/2024010512170831864F",
+							"protocolProfileBehavior": {
+								"disableBodyPruning": true
+							},
+							"request": {
+								"auth": {
+									"type": "basic",
+									"basic": {
+										"username": "7095657950",
+										"password": "abc@abc123"
+									}
+								},
+								"method": "GET",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": "http://localhost:8080/api/note/2024010512170831864F"
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "get-all-notes",
+					"item": [
+						{
+							"name": "http://localhost:8080/api/note",
+							"protocolProfileBehavior": {
+								"disableBodyPruning": true
+							},
+							"request": {
+								"auth": {
+									"type": "basic",
+									"basic": {
+										"username": "7095657950",
+										"password": "abc@abc123"
+									}
+								},
+								"method": "GET",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": "http://localhost:8080/api/note"
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "delete-note",
+					"item": [
+						{
+							"name": "http://localhost:8080/api/note/2024010512170831864F",
+							"request": {
+								"auth": {
+									"type": "basic",
+									"basic": {
+										"username": "7095657950",
+										"password": "abc@abc123"
+									}
+								},
+								"method": "DELETE",
+								"header": [],
+								"url": "http://localhost:8080/api/note/2024010512170831864F"
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "share-note",
+					"item": [
+						{
+							"name": "http://localhost:8080/api/note/FD2BB13471124B94B102/share?recipentEmailId=xyz@email.com",
+							"request": {
+								"auth": {
+									"type": "basic",
+									"basic": {
+										"username": "7095657950",
+										"password": "abc@abc123"
+									}
+								},
+								"method": "POST",
+								"header": [],
+								"url": {
+									"raw": "http://localhost:8080/api/note/52F148FC17FC4631B3CC/share?recipentEmailId=abc@email.com",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8080",
+									"path": [
+										"api",
+										"note",
+										"52F148FC17FC4631B3CC",
+										"share"
+									],
+									"query": [
+										{
+											"key": "recipentEmailId",
+											"value": "abc@email.com"
+										}
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "put-note",
+					"item": [
+						{
+							"name": "http://localhost:8080/api/note/52F148FC17FC4631B3CC",
+							"request": {
+								"auth": {
+									"type": "basic",
+									"basic": {
+										"username": "xyz@email.com",
+										"password": "abc@abc123"
+									}
+								},
+								"method": "PUT",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"title\" :\"java notes\",\r\n    \"content\":\"this is all about the java content\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": "http://localhost:8080/api/note/52F148FC17FC4631B3CC"
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "get-keywords",
+					"item": [
+						{
+							"name": "http://localhost:8080/api/note/search?keyword=notes",
+							"request": {
+								"auth": {
+									"type": "basic",
+									"basic": {
+										"username": "7095657950",
+										"password": "abc@abc123"
+									}
+								},
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "http://localhost:8080/api/note/search?keyword=notes",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8080",
+									"path": [
+										"api",
+										"note",
+										"search"
+									],
+									"query": [
+										{
+											"key": "keyword",
+											"value": "notes"
+										}
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				}
+			]
+		}
+	]
+}

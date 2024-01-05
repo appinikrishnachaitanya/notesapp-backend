@@ -103,7 +103,7 @@ public class NotesServiceImpl implements INotesService {
 		Note note = this.noteRepository.findByIdAndUserId(id, user.getId())
 				.orElseThrow(() -> new NotesNotFoundException("Notes Not Found with Id :" + id));
 		this.noteRepository.delete(note);
-		this.shareNotesRepository.deleteById(note.getId());
+		
 	}
 
 	@Override
