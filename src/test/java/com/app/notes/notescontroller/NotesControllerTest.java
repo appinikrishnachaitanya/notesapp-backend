@@ -15,10 +15,6 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
-import java.util.ArrayList;
-import java.util.List;
-
-import org.hamcrest.Matchers;
 import org.junit.jupiter.api.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -34,9 +30,10 @@ import com.app.notes.controller.NotesController;
 import com.app.notes.request.NoteRequest;
 import com.app.notes.response.NoteCreateResponse;
 import com.app.notes.response.NoteResponse;
-import com.app.notes.response.SharedNotesResponse;
 import com.app.notes.serviceimpl.NotesServiceImpl;
 import com.fasterxml.jackson.databind.ObjectMapper;
+
+import io.github.bucket4j.Bucket;
 
 @RunWith(SpringRunner.class)
 @WebMvcTest(NotesController.class)
@@ -50,6 +47,9 @@ public class NotesControllerTest {
 	@MockBean
 	private NotesServiceImpl noteService;
 
+	@MockBean
+	private Bucket bucket;
+
 	@Test
 	public void testCreateNotes() throws Exception {
 		NoteRequest noteRequest = new NoteRequest();
@@ -60,9 +60,10 @@ public class NotesControllerTest {
 		response.setId("123");
 
 		when(noteService.createNote(any(NoteRequest.class))).thenReturn(response);
+		when(bucket.tryConsume(1)).thenReturn(true); // Assuming you have properly configured the bucket in your test
 
 		mockMvc.perform(post("/api/note").contentType(MediaType.APPLICATION_JSON).content(asJsonString(noteRequest)))
-				.andExpect(status().isCreated()).andExpect(jsonPath("$.id", is("123")));
+				.andExpect(status().isCreated()).andExpect(jsonPath("$.id").value("123"));
 
 		verify(noteService, times(1)).createNote(any(NoteRequest.class));
 	}

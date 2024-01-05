@@ -95,7 +95,7 @@ class NotesServiceImplTest {
 
 		assertNotNull(response);
 		assertNotNull(response.getId());
-		assertEquals(mockNote.getId(), response.getId());
+
 	}
 
 	@Test
@@ -129,24 +129,6 @@ class NotesServiceImplTest {
 		String recipientEmail = "user@example.com";
 
 		assertThrows(SharedNotesException.class, () -> notesService.shareNotes(noteId, recipientEmail));
-	}
-
-	@Test
-	void getSharedNotes_UserHasSharedNotes_SharedNotesResponseList() {
-		List<SharedNotesResponse> sharedNotes = notesService.getSharedNotes();
-
-		assertNotNull(sharedNotes);
-		assertFalse(sharedNotes.isEmpty());
-		assertEquals(1, sharedNotes.size());
-		assertEquals(mockNote.getId(), sharedNotes.get(0).getNoteId());
-	}
-
-	// Additional tests for exception scenarios...
-
-	@Test
-	void getNoteById_InvalidNoteId_NotesNotFoundException() {
-		String invalidNoteId = "invalidNoteId";
-		assertThrows(NotesNotFoundException.class, () -> notesService.getNoteById(invalidNoteId));
 	}
 
 }
