@@ -25,7 +25,7 @@ public class SecurityConfig {
 	public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
 		http.csrf(csrf -> csrf.disable())
 				.authorizeHttpRequests(
-						authorize -> authorize.requestMatchers("/actuator/**", "/swagger-ui/**", "/api/v3-docs/**","/api/auth/**","/h2-console/**")
+						authorize -> authorize.requestMatchers("/actuator/**", "/swagger-ui/**", "/v3/api-docs/**","/api/auth/**","/swagger-resources/**","/notessecurity-openapi/**")
 								.permitAll().anyRequest().authenticated())
 				.httpBasic(Customizer.withDefaults());
 
