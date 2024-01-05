@@ -1,0 +1,13 @@
+spring:
+  application:
+    name: notes-ms-api
+  datasource:
+    username: postgres
+    password: 
+    url: jdbc:postgresql://localhost:5432/notesdb
+  jpa:
+    database: POSTGRESQL
+    
+    show-sql: true
+    hibernate:
+      ddl-auto: create-drop
